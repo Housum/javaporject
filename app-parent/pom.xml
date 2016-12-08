@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.hotusm.app</groupId>
+  <artifactId>app-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <!-- 如果是一个父maven项目的话  那么就必须选择pom -->
+  <packaging>pom</packaging>
+  
+  <!-- 指定模块 -->
+  <modules>
+  	<module>app-util</module>
+  </modules>
+  
+  <properties>
+  		<spring.version>4.1.2.RELEASE</spring.version>
+  </properties>
+  
+  <!--dependencyManagement
+  	的设置可以在之类中直接的使用  不需要加version 就可以使用了
+  -->
+  <dependencyManagement>
+	<dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+	</dependencies>  	
+  </dependencyManagement>
+  
+  <build>
+  		<plugins>
+  			  <plugin>  
+				   <groupId>org.apache.maven.plugins</groupId>  
+				   <artifactId>maven-surefire-plugin</artifactId>  
+				   <configuration>  
+				    	<skip>true</skip>  
+				   </configuration>  
+			  </plugin>
+			  <plugin>  
+				   <groupId>org.mortbay.jetty</groupId>  
+				   <artifactId>maven-jetty-plugin</artifactId>        
+			  </plugin> 
+  		</plugins>
+  </build>
+  
+</project>
