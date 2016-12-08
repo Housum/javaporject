@@ -1,0 +1,4 @@
+使用闭锁:
+	闭锁是一个同步类的工具  可以延迟线程的进度知道其到达终止状态
+	@see com.hotusm.thread.detail.book.closelock.TestHarness
+	@see com.hotusm.thread.detail.book.closelock.Preloader
