@@ -1,0 +1,5 @@
+com\sishuok\chapter2\config\RootConfiguration.class
+com\sishuok\chapter2\web\controller\UserController.class
+com\sishuok\chapter2\config\SpringMvcConfiguration.class
+com\sishuok\chapter2\initializer\NoXmlWebAppInitializer.class
+com\sishuok\chapter2\service\UserService.class

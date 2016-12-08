@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/sishuok/chapter3/web/controller/CallableController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/controller/DeferredResultController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/controller/StreamingController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/controller/WebAsyncTaskController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/controller/chat/ChatController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/controller/chat/MsgPublisher.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/interceptor/MyDeferredResultInterceptor.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/interceptor/MyDefferedResultController.java=UTF-8
+encoding//src/main/java/com/sishuok/chapter3/web/listener/ListenerController.java=UTF-8

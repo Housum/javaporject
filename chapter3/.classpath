@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar" sourcepath="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/jsp/jsp-api/2.2/jsp-api-2.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-servlet/9.0.4.v20130625/jetty-servlet-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-security/9.0.4.v20130625/jetty-security-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-server/9.0.4.v20130625/jetty-server-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/9.0.4.v20130625/jetty-http-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/9.0.4.v20130625/jetty-util-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/9.0.4.v20130625/jetty-io-9.0.4.v20130625.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
