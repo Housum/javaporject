@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/"/>
+		
+		<!-- 
+			@see http://freemarker.org/docs/ref_directive_setting.html		
+		 -->
+		<property name="freemarkerSettings">
+			<props>
+				<!-- 默认的编码 -->
+				<prop key="default_encoding">UTF-8</prop>
+				<!-- freemark 检查每隔多久检查一次模板是否更新 -->
+				<prop key="template_update_delay">5</prop>
+				<!-- 根据locale的值来进行国际化 该模板所使用的语言环境选项。en,zh,zh_CN,zh_TW -->
+				<prop key="locale">zh_TW</prop>
+				<!-- URL编码的字符集 -->
+				<prop key="url_escaping_charset">UTF-8</prop>
+				<!-- 
+					date_format=yyyy-MM-dd    ##显示日期格式
+					time_format=HH:mm:ss      ##显示时间格式
+					datetime_format=yyyy-MM-dd HH:mm:ss   ##显示日期格式
+				 -->
+				<prop key="date_format">yyyy-MM-dd</prop>
+				<!--布尔值格式化输出的格式 -->
+				<prop key="boolean_format">true,false</prop>
+				<!-- 所有的时间格式 -->
+				<prop key="time_zone">GMT+8</prop>
+				<!-- 数字格式化输出的格式 -->
+				<prop key="number_format">0.######</prop>
+				<!-- 如果变量为null,转化为空字符串，比如做比较的时候按照空字符串做比较 -->
+				<prop key="classic_compatible">true</prop>
+				<!-- 去掉多余的空格 -->
+				<prop key="whitespace_stripping">true</prop>
+				<!-- auto_detect:表示使用默认的形式(使用angle_bracket) . angle_bracket:表示<>. square_bracket:方括号-->
+				<prop key="tag_syntax">square_bracket</prop>
+				<!-- 输出的编码 -->
+				<prop key="output_encoding">UTF-8</prop>
+			</props>				
+		</property>
+	</bean>
+
+	<!-- 
+	<mvc:freemarker-configurer>
+		<mvc:template-loader-path location="/"/>
+	</mvc:freemarker-configurer>
+	 -->
+	 
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".ftl"/>
+		<property name="contentType" value="text/html;charset=utf=8"/>
+		<property name="cache" value="false"/>
+		<property name="order" value="0"/>
+		
+		<property name="attributesMap">
+			<map>
+				<entry key="CustomTag" value="com.hotusm.fm.CustomTag"/>
+			</map>
+		</property>
+		
+		<!-- 
+			这个属性表示的是是否可以使用@PathVariable 
+			<property name="exposePathVariables" value="false"/>
+		 -->
+	</bean>
+	
+	<mvc:annotation-driven/>
+	<context:annotation-config/>
+	<context:component-scan base-package="com.hotusm.web"/>
+	
+</beans>

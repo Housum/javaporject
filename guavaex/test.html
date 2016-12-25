@@ -1,0 +1,1096 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta name="baidu_union_verify" content="d30f7acd6a9a378cc0aeb0bd0ddfe30d">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9394337417063147",
+    enable_page_level_ads: true
+  });
+</script>
+<title>[Google Guava] 9-I/O | 并发编程网 &#8211; ifeve.com</title>
+<meta name="description" content="让天下没有难学的技术" />
+
+<link rel="alternate" type="application/rss+xml" title="并发编程网 &#8211; ifeve.com RSS Feed" href="http://ifeve.com/feed/" />
+<link rel="alternate" type="application/atom+xml" title="并发编程网 &#8211; ifeve.com Atom Feed" href="http://ifeve.com/feed/atom/" /> 
+<link rel="pingback" href="http://ifeve.com/xmlrpc.php" />
+
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/style.css" type="text/css" />
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/comment-style.css" type="text/css" />
+
+ 
+<link rel="alternate" type="application/rss+xml" title="并发编程网 - ifeve.com &raquo; [Google Guava] 9-I/O评论Feed" href="http://ifeve.com/google-guava-io/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/ifeve.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.10"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='wpfp-css' href='http://ifeve.com/wp-content/plugins/wp-favorite-posts/wpfp.css' type='text/css' />
+<link rel='stylesheet' id='yarppWidgetCss-css'  href='http://ifeve.com/wp-content/plugins/yet-another-related-posts-plugin/style/widget.css?ver=4.2.10' type='text/css' media='all' />
+<link rel='stylesheet' id='dwqa-style-css'  href='http://ifeve.com/wp-content/plugins/dw-question-answer/templates/assets/css/style.css?ver=1111548461' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-postratings-css'  href='http://ifeve.com/wp-content/plugins/wp-postratings/postratings-css.css?ver=1.83' type='text/css' media='all' />
+<script type='text/javascript' src='http://ifeve.com/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+<script type='text/javascript' src='http://ifeve.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/wp-favorite-posts/wpfp.js?ver=4.2.10'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://ifeve.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://ifeve.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='[Google Guava] 8-区间' href='http://ifeve.com/google-guava-ranges/' />
+<link rel='next' title='[Google Guava] 10-散列' href='http://ifeve.com/google-guava-hashing/' />
+<meta name="generator" content="WordPress 4.2.10" />
+<link rel='canonical' href='http://ifeve.com/google-guava-io/' />
+<link rel='shortlink' href='http://ifeve.com/?p=8995' />
+
+
+<!-- Plugin: Open external links a new window. Plugin by Kristian Risager Larsen, http://kristianrisagerlarsen.dk . Download it at http://wordpress.org/extend/plugins/open-external-links-in-a-new-window/ -->
+<script type="text/javascript">//<![CDATA[
+	function external_links_in_new_windows_loop() {
+		if (!document.links) {
+			document.links = document.getElementsByTagName('a');
+		}
+		var change_link = false;
+		var force = 'http://ifeve.com';
+		var ignore = '';
+
+		for (var t=0; t<document.links.length; t++) {
+			var all_links = document.links[t];
+			change_link = false;
+			
+			if(document.links[t].hasAttribute('onClick') == false) {
+				// forced if the address starts with http (or also https), but does not link to the current domain
+				if(all_links.href.search(/^http/) != -1 && all_links.href.search('ifeve.com') == -1) {
+					// alert('Changeda '+all_links.href);
+					change_link = true;
+				}
+					
+				if(force != '' && all_links.href.search(force) != -1) {
+					// forced
+					// alert('force '+all_links.href);
+					change_link = true;
+				}
+				
+				if(ignore != '' && all_links.href.search(ignore) != -1) {
+					// alert('ignore '+all_links.href);
+					// ignored
+					change_link = false;
+				}
+
+				if(change_link == true) {
+					// alert('Changed '+all_links.href);
+					document.links[t].setAttribute('onClick', 'javascript:window.open(\''+all_links.href+'\'); return false;');
+					document.links[t].removeAttribute('target');
+				}
+			}
+		}
+	}
+	
+	// Load
+	function external_links_in_new_windows_load(func)
+	{	
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function'){
+			window.onload = func;
+		} else {
+			window.onload = function(){
+				oldonload();
+				func();
+			}
+		}
+	}
+
+	external_links_in_new_windows_load(external_links_in_new_windows_loop);
+	//]]></script>
+
+
+<!-- StarBox - the Author Box for Humans 3.0.4, visit: http://wordpress.org/plugins/starbox/ -->
+<!-- /StarBox - the Author Box for Humans -->
+
+<link rel='stylesheet' id='frontend.css-css'  href='http://ifeve.com/wp-content/plugins/starbox//themes/fancy/css/frontend.css?ver=3.0.4' type='text/css' media='all' />
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/starbox//themes/fancy/js/frontend.js?ver=3.0.4'></script>
+<link rel='stylesheet' id='hidedefault.css-css'  href='http://ifeve.com/wp-content/plugins/starbox//themes/admin/css/hidedefault.css?ver=3.0.4' type='text/css' media='all' />
+<style type="text/css" media="screen">#wp-admin-bar-user-info .avatar-64 {width:64px}</style>
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="syntaxhighlighteranchor"></style>
+
+<script type="text/javascript" src="http://ifeve.com/wp-content/themes/flat/js/jscript.js"></script>
+<script type="text/javascript" src="http://ifeve.com/wp-content/themes/flat/js/comment.js"></script>
+<script type="text/javascript" src="http://ifeve.com/wp-content/themes/flat/js/rollover.js"></script>
+
+<!--[if IE 7]>
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/ie7.css" type="text/css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/ie8.css" type="text/css" />
+<![endif]-->
+
+
+<style type="text/css">
+a, .post .title a:hover, .post_meta a:hover, #bread_crumb ul li a:hover, #previous_post a:hover, #next_post a:hover, .post a.more-link:hover, #right_col li a:hover, #copyright li a:hover, #archive_headline #keyword,
+   #comments_wrapper a:hover, #comment_header_right .comment_switch_active a, #comment_header_right .comment_switch_active a:hover, #comment_pager .current
+   { color:#00A19E; }
+
+#no_post a.back:hover, #wp-calendar td a:hover, #wp-calendar #prev a:hover, #wp-calendar #next a:hover, .page_navi a:hover, #submit_comment:hover
+ { background-color:#00A19E; }
+
+#guest_info input:focus, #comment_textarea textarea:focus
+ { border:1px solid #00A19E; }
+
+a:hover
+ { color:#BDC900; }
+
+body { font-size:14px; }
+
+#header { background:url(http://ifeve.com/wp-content/uploads/flat/bg.png) left top; }
+.logo_text a { color:#F5F5F5; }
+#site_description {  border-top:1px solid #BBBBBB; color:#D2D9CC; }
+
+
+</style>
+
+</head>
+
+<body>
+
+ <div id="header">
+  <div class="header_menu">
+    <ul id="menu-%e4%b8%bb%e8%8f%9c%e5%8d%95" class="menu"><li id="menu-item-16594" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-16594"><a href="http://ifeve.com">首页</a></li>
+<li id="menu-item-3432" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3432"><a href="http://ifeve.com/wp-login.php">登录</a></li>
+<li id="menu-item-9219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-9219"><a href="http://ifeve.com/category/java/">JAVA</a>
+<ul class="sub-menu">
+	<li id="menu-item-16108" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16108"><a href="http://ifeve.com/java-io/">Java IO 教程</a></li>
+	<li id="menu-item-5283" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5283"><a href="http://ifeve.com/java-nio-all/">Java NIO 教程</a></li>
+	<li id="menu-item-17514" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17514"><a href="http://ifeve.com/java-reflection/">JAVA Reflection教程</a></li>
+	<li id="menu-item-16239" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16239"><a href="http://ifeve.com/java-network">Java 网络教程</a></li>
+	<li id="menu-item-4416" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4416"><a href="http://ifeve.com/java-concurrency-thread-directory/">Java并发和多线程</a></li>
+	<li id="menu-item-2767" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2767"><a href="http://ifeve.com/jmm-cookbook/">Java内存模型指南</a></li>
+	<li id="menu-item-2747" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2747"><a href="http://ifeve.com/jmm-faq/">Java内存模型FAQ</a></li>
+	<li id="menu-item-2765" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2765"><a href="http://ifeve.com/syn-jmm/">同步与Java内存模型</a></li>
+	<li id="menu-item-5789" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5789"><a href="http://ifeve.com/oracle-java-concurrency-tutorial/">Oracle官方并发教程</a></li>
+	<li id="menu-item-15316" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15316"><a href="http://ifeve.com/jvm-optimize/">JVM性能优化系列</a></li>
+	<li id="menu-item-15313" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15313"><a href="http://ifeve.com/useful-jvm-flags/">JVM实用参数系列</a></li>
+</ul>
+</li>
+<li id="menu-item-7938" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7938"><a href="http://ifeve.com/category/c/">C++</a></li>
+<li id="menu-item-9220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-9220"><a href="http://ifeve.com/category/framework/">Framework</a>
+<ul class="sub-menu">
+	<li id="menu-item-12798" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12798"><a href="http://ifeve.com/disruptor/">Disruptor 框架指南</a></li>
+	<li id="menu-item-12783" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12783"><a title="Netty" href="http://ifeve.com/category/netty/">Netty</a></li>
+	<li id="menu-item-12791" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12791"><a href="http://ifeve.com/category/scala/">Scala</a></li>
+	<li id="menu-item-12312" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12312"><a href="http://ifeve.com/getting-started-with-stom-index/">Storm 入门</a></li>
+	<li id="menu-item-9218" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9218"><a href="http://ifeve.com/google-guava/">Guava 官方指南</a></li>
+	<li id="menu-item-20471" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20471"><a href="http://ifeve.com/velocity-guide/">Apache Velocity 官方指南</a></li>
+	<li id="menu-item-21439" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-21439"><a href="http://ifeve.com/storm-translation/">Apache Storm 官方文档</a></li>
+</ul>
+</li>
+<li id="menu-item-555" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-555"><a href="http://ifeve.com/category/concurrency-translation/">其他译文</a>
+<ul class="sub-menu">
+	<li id="menu-item-2777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2777"><a href="http://ifeve.com/java-concurrent/">并发基础</a></li>
+	<li id="menu-item-3340" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3340"><a href="http://ifeve.com/aqs/">j.u.c同步框架</a></li>
+	<li id="menu-item-2769" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2769"><a href="http://ifeve.com/fj/">Fork Join框架</a></li>
+	<li id="menu-item-9221" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9221"><a href="http://ifeve.com/doug-lea/">Doug Lea 论文</a></li>
+	<li id="menu-item-4643" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4643"><a href="http://ifeve.com/mechanical-sympathy/">Mechanical Sympathy</a></li>
+	<li id="menu-item-6397" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6397"><a href="http://ifeve.com/stm/">软件事务内存导论</a></li>
+	<li id="menu-item-10845" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10845"><a href="http://ifeve.com/jsr133-cn/">JSR133中文版</a></li>
+</ul>
+</li>
+<li id="menu-item-103" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-103"><a href="http://ifeve.com/category/talk-concurrent/">本站原创</a>
+<ul class="sub-menu">
+	<li id="menu-item-2763" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2763"><a href="http://ifeve.com/talk-concurrency/">聊聊并发</a></li>
+	<li id="menu-item-2753" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2753"><a href="http://ifeve.com/java-memory-model-0/">深入理解Java内存模型</a></li>
+	<li id="menu-item-4862" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4862"><a href="http://ifeve.com/from-javaeye-sys-struct/">从Java视角理解系统结构</a></li>
+	<li id="menu-item-4627" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4627"><a href="http://ifeve.com/ali-itu-agile/">阿里内贸团队敏捷实践</a></li>
+</ul>
+</li>
+<li id="menu-item-7119" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-7119"><a href="http://ifeve.com/category/%e5%b9%b6%e5%8f%91%e4%b9%a6%e7%b1%8d/">并发书籍</a>
+<ul class="sub-menu">
+	<li id="menu-item-10846" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-10846"><a href="http://ifeve.com/art-of-java-concurrent-program/">《Java 并发编程的艺术》迷你书</a></li>
+	<li id="menu-item-6042" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6042"><a href="http://ifeve.com/perfbook/">《深入理解并行编程》</a></li>
+	<li id="menu-item-9172" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9172"><a href="http://ifeve.com/c-plus-plus-concurrency-in-action/">《C++ 并发编程》</a></li>
+	<li id="menu-item-7785" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7785"><a href="http://ifeve.com/java-7-concurrency-cookbook/">《Java 7 并发编程指南》</a></li>
+	<li id="menu-item-7120" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7120"><a href="http://ifeve.com/jvm-concurrency">《Java 虚拟机并发编程》</a></li>
+	<li id="menu-item-12360" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12360"><a href="http://ifeve.com/getting-started-with-stom-index/">《Storm入门》中文版</a></li>
+</ul>
+</li>
+<li id="menu-item-17079" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17079"><a href="http://ifeve.com/questions/">面试题</a></li>
+<li id="menu-item-22180" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22180"><a href="http://ifeve.com/my-favorite/">我的收藏</a></li>
+<li id="menu-item-9171" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-9171"><a href="http://ifeve.com/need-you/">加入我们</a>
+<ul class="sub-menu">
+	<li id="menu-item-3246" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3246"><a href="http://ifeve.com/contribute/">我要投稿</a></li>
+	<li id="menu-item-6854" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6854"><a href="http://ifeve.com/neitui/">内推阿里</a></li>
+</ul>
+</li>
+<li id="menu-item-105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-105"><a href="http://ifeve.com/about-site/">关于本站</a>
+<ul class="sub-menu">
+	<li id="menu-item-11306" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-11306"><a href="http://ifeve.com/category/%e6%b4%bb%e5%8a%a8/">活动</a></li>
+	<li id="menu-item-1487" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1487"><a href="http://ifeve.com/sitemap.html">文章归档</a></li>
+	<li id="menu-item-29361" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29361"><a href="http://ifeve.com/author/">本站作者</a></li>
+	<li id="menu-item-131" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-131"><a href="http://ifeve.com/about-site/about-me/">关于清英</a></li>
+	<li id="menu-item-7600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7600"><a href="http://ifeve.com/ads/">广告合作</a></li>
+</ul>
+</li>
+</ul>    </div>
+  <!-- logo -->
+  <h1 class="logo_text"><a href="http://ifeve.com/">并发编程网 - ifeve.com</a></h1>
+<h2 id='site_description'>让天下没有难学的技术</h2>
+ </div>
+
+ <div id="main_content" class="clearfix">
+
+  <div id="left_col">
+      <div id="bread_crumb">
+    <ul class="clearfix">
+     <li id="bc_home"><a href="http://ifeve.com/" title="首页">首页</a></li>
+     <li id="bc_cat"><a href="http://ifeve.com/category/guava-2/">guava</a></li>     <li class="last">[Google Guava] 9-I/O</li>
+    </ul>
+   </div>
+   
+   
+   <div class="post_wrap clearfix" id="single">
+    <div class="post">
+     <h3 class="title"><span>[Google Guava] 9-I/O</span></h3>
+     <div class="post_content">
+      <p><a href="http://code.google.com/p/guava-libraries/wiki/IOExplained">原文链接</a> <a href="http://ifeve.com/google-guava-io">译文链接</a> <strong>译者：</strong>沈义扬</p>
+<h2>字节流和字符流</h2>
+<p>Guava使用术语&#8221;流&#8221; 来表示可关闭的，并且在底层资源中有位置状态的I/O数据流。术语&#8221;字节流&#8221;指的是InputStream或OutputStream，&#8221;字符流&#8221;指的是Reader 或Writer（虽然他们的接口Readable 和Appendable被更多地用于方法参数）。相应的工具方法分别在<a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteStreams.html"><tt>ByteStreams</tt></a> 和<a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html"><tt>CharStreams</tt></a>中。</p>
+<p>大多数Guava流工具一次处理一个完整的流，并且/或者为了效率自己处理缓冲。还要注意到，接受流为参数的Guava方法不会关闭这个流：关闭流的职责通常属于打开流的代码块。<span id="more-8995"></span></p>
+<p>其中的一些工具方法列举如下：</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="312"><b>ByteStreams</b></td>
+<td width="307"><b>CharStreams</b></td>
+</tr>
+<tr>
+<td width="312"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteStreams.html#toByteArray(java.io.InputStream)"><tt>byte[] toByteArray(InputStream)</tt></a></td>
+<td width="307"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html#toString(java.lang.Readable)"><tt>String toString(Readable)</tt></a></td>
+</tr>
+<tr>
+<td width="312">N/A</td>
+<td width="307"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharStreams.html#readLines(java.lang.Readable)"><tt>List&lt;String&gt; readLines(Readable)</tt></a></td>
+</tr>
+<tr>
+<td width="312"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteStreams.html#copy(java.io.InputStream, java.io.OutputStream)"><tt>long copy(InputStream, OutputStream)</tt></a></td>
+<td width="307"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharStreams.html#copy(java.lang.Readable, java.lang.Appendable)"><tt>long copy(Readable, Appendable)</tt></a></td>
+</tr>
+<tr>
+<td width="312"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteStreams.html#readFully(java.io.InputStream, byte[])"><tt>void readFully(InputStream, byte[])</tt></a></td>
+<td width="307">N/A</td>
+</tr>
+<tr>
+<td width="312"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteStreams.html#skipFully(java.io.InputStream, long)"><tt>void skipFully(InputStream, long)</tt></a></td>
+<td width="307"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharStreams.html#skipFully(java.io.Reader, long)"><tt>void skipFully(Reader, long)</tt></a></td>
+</tr>
+<tr>
+<td width="312"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteStreams.html#nullOutputStream()"><tt>OutputStream nullOutputStream()</tt></a></td>
+<td width="307"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharStreams.html#nullWriter()"><tt>Writer nullWriter()</tt></a></td>
+</tr>
+</tbody>
+</table>
+<p><b>关于InputSupplier 和OutputSupplier要注意：</b></p>
+<p>在ByteStreams、CharStreams以及com.google.common.io包中的一些其他类中，某些方法仍然在使用InputSupplier和OutputSupplier接口。这两个借口和相关的方法是不推荐使用的：它们已经被下面描述的source和sink类型取代了，并且最终会被移除。</p>
+<h2>源与汇</h2>
+<p>通常我们都会创建I/O工具方法，这样可以避免在做基础运算时总是直接和流打交道。例如，Guava有Files.toByteArray(File) 和Files.write(File, byte[])。然而，流工具方法的创建经常最终导致散落各处的相似方法，每个方法读取不同类型的源</p>
+<p>或写入不同类型的汇[sink]。例如，Guava中的Resources.toByteArray(URL)和Files.toByteArray(File)做了同样的事情，只不过数据源一个是URL，一个是文件。</p>
+<p>为了解决这个问题，Guava有一系列关于源与汇的抽象。源或汇指某个你知道如何从中打开流的资源，比如File或URL。源是可读的，汇是可写的。此外，源与汇按照字节和字符划分类型。</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="138"><b> </b></td>
+<td width="240"><b>字节</b><b></b></td>
+<td width="240"><b>字符</b><b></b></td>
+</tr>
+<tr>
+<td width="138"><b>读</b><b></b></td>
+<td width="240"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteSource.html"><tt>ByteSource</tt></a></td>
+<td width="240"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharSource.html"><tt>CharSource</tt></a></td>
+</tr>
+<tr>
+<td width="138"><b>写</b><b></b></td>
+<td width="240"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/ByteSink.html"><tt>ByteSink</tt></a></td>
+<td width="240"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/CharSink.html"><tt>CharSink</tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>源与汇API的好处是它们提供了通用的一组操作。比如，一旦你把数据源包装成了ByteSource，无论它原先的类型是什么，你都得到了一组按字节操作的方法。</p>
+<h3>创建源与汇</h3>
+<p>Guava提供了若干源与汇的实现：</p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="276"><b>字节</b><b></b></td>
+<td width="342"><b>字符</b><b></b></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#asByteSource(java.io.File)"><tt>Files.asByteSource(File)</tt></a></td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#asCharSource(java.io.File, java.nio.charset.Charset)"><tt>Files.asCharSource(File, Charset)</tt></a></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#asByteSink(java.io.File, com.google.common.io.FileWriteMode...)"><tt>Files.asByteSink(File, FileWriteMode...)</tt></a></td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#asCharSink(java.io.File, java.nio.charset.Charset, com.google.common.io.FileWriteMode...)"><tt>Files.asCharSink(File, Charset, FileWriteMode...)</tt></a></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Resources.html#asByteSource(java.net.URL)"><tt>Resources.asByteSource(URL)</tt></a></td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Resources.html#asCharSource(java.net.URL, java.nio.charset.Charset)"><tt>Resources.asCharSource(URL, Charset)</tt></a></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#wrap(byte[])"><tt>ByteSource.wrap(byte[])</tt></a></td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#wrap(java.lang.CharSequence)"><tt>CharSource.wrap(CharSequence)</tt></a></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#concat(com.google.common.io.ByteSource...)"><tt>ByteSource.concat(ByteSource...)</tt></a></td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#concat(com.google.common.io.CharSource...)"><tt>CharSource.concat(CharSource...)</tt></a></td>
+</tr>
+<tr>
+<td width="276"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#slice(long, long)"><tt>ByteSource.slice(long, long)</tt></a></td>
+<td width="342">N/A</td>
+</tr>
+<tr>
+<td width="276">N/A</td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#asCharSource(java.nio.charset.Charset)"><tt>ByteSource.asCharSource(Charset)</tt></a></td>
+</tr>
+<tr>
+<td width="276">N/A</td>
+<td width="342"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSink.html#asCharSink(java.nio.charset.Charset)"><tt>ByteSink.asCharSink(Charset)</tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>此外，你也可以继承这些类，以创建新的实现。</p>
+<p>注：把已经打开的流（比如InputStream）包装为源或汇听起来是很有诱惑力的，但是应该避免这样做。源与汇的实现应该在每次openStream()方法被调用时都创建一个新的流。始终创建新的流可以让源或汇管理流的整个生命周期，并且让多次调用openStream()返回的流都是可用的。此外，如果你在创建源或汇之前创建了流，你不得不在异常的时候自己保证关闭流，这压根就违背了发挥源与汇API优点的初衷。</p>
+<h3>使用源与汇</h3>
+<p>一旦有了源与汇的实例，就可以进行若干读写操作。</p>
+<p><strong>通用操作</strong></p>
+<p>所有源与汇都有一些方法用于打开新的流用于读或写。默认情况下，其他源与汇操作都是先用这些方法打开流，然后做一些读或写，最后保证流被正确地关闭了。这些方法列举如下：</p>
+<ul>
+<li>openStream()：根据源与汇的类型，返回InputStream、OutputStream、Reader或者Writer。</li>
+<li>openBufferedStream()：根据源与汇的类型，返回InputStream、OutputStream、BufferedReader或者BufferedWriter。返回的流保证在必要情况下做了缓冲。例如，从字节数组读数据的源就没有必要再在内存中作缓冲，这就是为什么该方法针对字节源不返回BufferedInputStream。字符源属于例外情况，它一定返回BufferedReader，因为BufferedReader中才有readLine()方法。</li>
+</ul>
+<p><strong>源操作</strong></p>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="294"><b>字节源</b><b></b></td>
+<td width="324"><b>字符源</b><b></b></td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#read()"><tt>byte[]   read()</tt></a></td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#read()"><tt>String   read()</tt></a></td>
+</tr>
+<tr>
+<td width="294">N/A</td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#readLines()"><tt>ImmutableList&lt;String&gt;   readLines()</tt></a></td>
+</tr>
+<tr>
+<td width="294">N/A</td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#readFirstLine()"><tt>String   readFirstLine()</tt></a></td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#copyTo(com.google.common.io.ByteSink)"><tt>long   copyTo(ByteSink)</tt></a></td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#copyTo(com.google.common.io.CharSink)"><tt>long   copyTo(CharSink)</tt></a></td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#copyTo(java.io.OutputStream)"><tt>long   copyTo(OutputStream)</tt></a></td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#copyTo(java.lang.Appendable)"><tt>long   copyTo(Appendable)</tt>   </a></td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#size()"><tt>long   size()</tt></a> (in bytes)</td>
+<td width="324">N/A</td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#isEmpty()"><tt>boolean   isEmpty()</tt></a></td>
+<td width="324"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSource.html#isEmpty()"><tt>boolean   isEmpty()</tt></a></td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#contentEquals(com.google.common.io.ByteSource)"><tt>boolean   contentEquals(ByteSource)</tt></a></td>
+<td width="324">N/A</td>
+</tr>
+<tr>
+<td width="294"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSource.html#hash(com.google.common.hash.HashFunction)"><tt>HashCode   hash(HashFunction)</tt></a></td>
+<td width="324">N/A</td>
+</tr>
+</tbody>
+</table>
+<p>汇操作</p>
+<table style="width: 624px; height: 123px;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="234"><b>字节汇</b><b></b></td>
+<td width="384"><b>字符汇</b><b></b></td>
+</tr>
+<tr>
+<td width="234"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSink.html#write(byte[])"><tt>void write(byte[])</tt></a></td>
+<td width="384"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSink.html#write(java.lang.CharSequence)"><tt>void write(CharSequence)</tt></a></td>
+</tr>
+<tr>
+<td width="234"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/ByteSink.html#writeFrom(java.io.InputStream)"><tt>long writeFrom(InputStream)</tt></a></td>
+<td width="384"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSink.html#writeFrom(java.lang.Readable)"><tt>long writeFrom(Readable)</tt></a></td>
+</tr>
+<tr>
+<td width="234">N/A</td>
+<td width="384"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSink.html#writeLines(java.lang.Iterable)"><tt>void writeLines(Iterable&lt;? extends CharSequence&gt;)</tt></a></td>
+</tr>
+<tr>
+<td width="234">N/A</td>
+<td width="384"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/CharSink.html#writeLines(java.lang.Iterable, java.lang.String)"><tt>void writeLines(Iterable&lt;? extends CharSequence&gt;, String)</tt></a></td>
+</tr>
+</tbody>
+</table>
+<h3>范例</h3>
+<pre class="brush: java; title: ; notranslate" title="">
+//Read the lines of a UTF-8 text file
+ImmutableList&lt;String&gt; lines = Files.asCharSource(file, Charsets.UTF_8).readLines();
+//Count distinct word occurrences in a file
+Multiset&lt;String&gt; wordOccurrences = HashMultiset.create(
+        Splitter.on(CharMatcher.WHITESPACE)
+            .trimResults()
+            .omitEmptyStrings()
+            .split(Files.asCharSource(file, Charsets.UTF_8).read()));
+
+//SHA-1 a file
+HashCode hash = Files.asByteSource(file).hash(Hashing.sha1());
+
+//Copy the data from a URL to a file
+Resources.asByteSource(url).copyTo(Files.asByteSink(file));
+</pre>
+<h2>文件操作</h2>
+<p>除了创建文件源和文件的方法，Files类还包含了若干你可能感兴趣的便利方法。</p>
+<table style="width: 624px; height: 93px;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td width="264"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/Files.html#createParentDirs(java.io.File)"><tt>createParentDirs(File)</tt></a></td>
+<td width="354">必要时为文件创建父目录</td>
+</tr>
+<tr>
+<td width="264"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/Files.html#getFileExtension(java.lang.String)"><tt>getFileExtension(String)</tt></a></td>
+<td width="354">返回给定路径所表示文件的扩展名</td>
+</tr>
+<tr>
+<td width="264"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#getNameWithoutExtension(java.lang.String)"><tt>getNameWithoutExtension(String)</tt></a></td>
+<td width="354">返回去除了扩展名的文件名</td>
+</tr>
+<tr>
+<td width="264"><a href="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/io/Files.html#simplifyPath(java.lang.String)"><tt>simplifyPath(String)</tt></a></td>
+<td width="354">规范文件路径，并不总是与文件系统一致，请仔细测试</td>
+</tr>
+<tr>
+<td width="264"><a href="http://docs.guava-libraries.googlecode.com/git/javadoc/com/google/common/io/Files.html#fileTreeTraverser()"><tt>fileTreeTraverser()</tt></a></td>
+<td width="354">返回TreeTraverser用于遍历文件树</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-top: 15px; font-style: italic">
+<p><strong>原创文章，转载请注明：</strong> 转载自<a href="http://ifeve.com/">并发编程网 &#8211; ifeve.com</a><strong>本文链接地址:</strong> <a href="http://ifeve.com/google-guava-io/">[Google Guava] 9-I/O</a></p>
+</div>
+<hr />
+<a target="_blank" href="https://h5.jianxun.io/20160818-jianzisheng/?utm_source=ad&#038;utm_medium=site_ad&#038;utm_compaign=ifeve&#038;utm_content=pos_bottom&#038;utm_term=jialezhang"><img src="https://jianxun.io/gg/201609/ifeve500X150@1x.png"></a></p>
+<div style="clear:both; margin-top:5px; margin-bottom:5px;"></div><div style="float:left"><!-- JiaThis Button BEGIN -->
+<div id="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_kaixin001"></a>
+	<a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END --></div><div style="clear:both; margin-top:5px; margin-bottom:5px;"></div>
+                         <div class="abh_box abh_box_down abh_box_"><ul class="abh_tabs"> <li class="abh_about abh_active"><a href="#abh_about">About</a></li> <li class="abh_posts"><a href="#abh_posts">Latest Posts</a></li></ul><div class="abh_tab_content"><section class="vcard abh_about_tab abh_tab" style="display:block"><div class="abh_image"><a href="http://weibo.com/1847074805" class="url" target="_blank" title="沈义扬"><img alt='' src='http://tp3.sinaimg.cn/1847074805/50/0/1' class='avatar avatar-80' height='80' width='80' /></a></div><div class="abh_social"> </div><div class="abh_text"><h3 class="fn name" ><a href="http://weibo.com/1847074805" class="url" target="_blank">沈义扬</a></h3><div class="abh_job" ></div><div class="description note abh_description" >本站的翻译主编。关注并发编程，面向对象设计，分布式系统。</div></div> </section><section class="abh_posts_tab abh_tab" ><div class="abh_image"><a href="http://weibo.com/1847074805" class="url" target="_blank" title="沈义扬"><img alt='' src='http://tp3.sinaimg.cn/1847074805/50/0/1' class='avatar avatar-80' height='80' width='80' /></a></div><div class="abh_social"> </div><div class="abh_text"><h4 >Latest posts by 沈义扬 <span class="abh_allposts">(<a href="http://ifeve.com/author/Shen_Yiyang/">see all</a>)</span></h4><div class="abh_description note" ><ul>				<li>					<a href="http://ifeve.com/google-guava/">Google Guava官方教程（中文版）</a><span> - 2014年4月11日</span>				</li>				<li>					<a href="http://ifeve.com/google-guava-ordering/">[Google Guava] 排序: Guava强大的”流畅风格比较器”</a><span> - 2014年4月11日</span>				</li>				<li>					<a href="http://ifeve.com/google-guava-math/">[Google Guava] 12-数学运算</a><span> - 2014年4月9日</span>				</li></ul></div></div> </section></div> </div><span class='wpfp-span'><img src='http://ifeve.com/wp-content/plugins/wp-favorite-posts/img/star.png' alt='Favorite' title='Favorite' class='wpfp-img' /><img src='http://ifeve.com/wp-content/plugins/wp-favorite-posts/img/loading.gif' alt='Loading' title='Loading' class='wpfp-hide wpfp-img' /><a class='wpfp-link' href='?wpfpaction=add&amp;postid=8995' title='添加本文到我的收藏' rel='nofollow'>添加本文到我的收藏</a></span><div class='yarpp-related'>
+<h3>Related posts:</h3><ol>
+<li><a href="http://ifeve.com/google-guava-strings/" rel="bookmark" title="[Google Guava] 6-字符串处理：分割，连接，填充">[Google Guava] 6-字符串处理：分割，连接，填充 </a></li>
+<li><a href="http://ifeve.com/google-guava-primitives/" rel="bookmark" title="[Google Guava] 7-原生类型">[Google Guava] 7-原生类型 </a></li>
+<li><a href="http://ifeve.com/google-guava-immutablecollections/" rel="bookmark" title="[Google Guava] 2.1-不可变集合">[Google Guava] 2.1-不可变集合 </a></li>
+<li><a href="http://ifeve.com/google-guava-hashing/" rel="bookmark" title="[Google Guava] 10-散列">[Google Guava] 10-散列 </a></li>
+<li><a href="http://ifeve.com/google-guava-ordering/" rel="bookmark" title="[Google Guava] 排序: Guava强大的”流畅风格比较器”">[Google Guava] 排序: Guava强大的”流畅风格比较器” </a></li>
+<li><a href="http://ifeve.com/google-guava-collectionhelpersexplained/" rel="bookmark" title="[Google Guava] 2.4-集合扩展工具类">[Google Guava] 2.4-集合扩展工具类 </a></li>
+<li><a href="http://ifeve.com/google-guava-preconditions/" rel="bookmark" title="[Google Guava] 1.2-前置条件">[Google Guava] 1.2-前置条件 </a></li>
+<li><a href="http://ifeve.com/google-guava-using-and-avoiding-null/" rel="bookmark" title="[Google Guava] 1.1-使用和避免null">[Google Guava] 1.1-使用和避免null </a></li>
+<li><a href="http://ifeve.com/google-guava-functional/" rel="bookmark" title="[Google Guava] 4-函数式编程">[Google Guava] 4-函数式编程 </a></li>
+<li><a href="http://ifeve.com/google-guava-math/" rel="bookmark" title="[Google Guava] 12-数学运算">[Google Guava] 12-数学运算 </a></li>
+<li><a href="http://ifeve.com/google-guava-commonobjectutilities/" rel="bookmark" title="[Google Guava] 1.3-常见Object方法">[Google Guava] 1.3-常见Object方法 </a></li>
+<li><a href="http://ifeve.com/google-guava-ranges/" rel="bookmark" title="[Google Guava] 8-区间">[Google Guava] 8-区间 </a></li>
+<li><a href="http://ifeve.com/google-guava-eventbus/" rel="bookmark" title="[Google Guava] 11-事件总线">[Google Guava] 11-事件总线 </a></li>
+<li><a href="http://ifeve.com/google-guava-serviceexplained/" rel="bookmark" title="Google-Guava Concurrent包里的Service框架浅析">Google-Guava Concurrent包里的Service框架浅析 </a></li>
+<li><a href="http://ifeve.com/google-guava-throwables/" rel="bookmark" title="[Google Guava] 1.5-Throwables：简化异常和错误的传播与检查">[Google Guava] 1.5-Throwables：简化异常和错误的传播与检查 </a></li>
+</ol>
+</div>
+           </div><!-- END .post_content -->
+    </div>
+    <div class="meta">
+          <ul>
+      <li class="post_date clearfix">
+       <span class="date">04</span>
+       <span class="month">Apr</span>
+       <span class="year">2014</span>
+      </li>
+      
+<li class="post_comment">
+20,313 人阅读</li>
+
+      <li class="post_author"><a href="http://ifeve.com/author/Shen_Yiyang/" title="由沈义扬发布" rel="author">沈义扬</a></li>      <li class="post_category"><a href="http://ifeve.com/category/guava-2/" rel="category tag">guava</a></li>       <li class="post_category"><div id="post-ratings-8995" class="post-ratings" itemscope itemtype="http://schema.org/Article" data-nonce="1281d80fe8"><img id="rating_8995_1" src="http://ifeve.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_on.gif" alt="好烂啊" title="好烂啊" onmouseover="current_rating(8995, 1, '好烂啊');" onmouseout="ratings_off(3.7, 4, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" /><img id="rating_8995_2" src="http://ifeve.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_on.gif" alt="没价值" title="没价值" onmouseover="current_rating(8995, 2, '没价值');" onmouseout="ratings_off(3.7, 4, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" /><img id="rating_8995_3" src="http://ifeve.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_on.gif" alt="凑合看看" title="凑合看看" onmouseover="current_rating(8995, 3, '凑合看看');" onmouseout="ratings_off(3.7, 4, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" /><img id="rating_8995_4" src="http://ifeve.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_half.gif" alt="还不错" title="还不错" onmouseover="current_rating(8995, 4, '还不错');" onmouseout="ratings_off(3.7, 4, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" /><img id="rating_8995_5" src="http://ifeve.com/wp-content/plugins/wp-postratings/images/stars_crystal/rating_off.gif" alt="超赞" title="超赞" onmouseover="current_rating(8995, 5, '超赞');" onmouseout="ratings_off(3.7, 4, 0);" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" /> (<strong>6</strong> votes, average: <strong>3.67</strong> out of 5)<br /><span class="post-ratings-text" id="ratings_8995_text"></span><meta itemprop="headline" content="[Google Guava] 9-I/O" /><meta itemprop="description" content="原文链接&nbsp;译文链接&nbsp;译者：沈义扬
+字节流和字符流
+Guava使用术语&quot;流&quot; 来表示可关闭的，并且在底层资源中有位置状态的I/O数据流。术语&quot;字节流&quot;指的是InputStream或OutputStream，&quot;字符流&quot;指的是Reader 或Writer（虽然他们的接口Readable 和Appendable被更多地用于方法参数）。相应的工具方法分别在ByteStreams 和CharStreams..." /><meta itemprop="datePublished" content="2014-04-04T09:27:07+00:00" /><meta itemprop="url" content="http://ifeve.com/google-guava-io/" /><div style="display: none;" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><meta itemprop="bestRating" content="5" /><meta itemprop="worstRating" content="1" /><meta itemprop="ratingValue" content="3.67" /><meta itemprop="ratingCount" content="6" /></div></div><div id="post-ratings-8995-loading" class="post-ratings-loading">
+			<img src="http://ifeve.com/wp-content/plugins/wp-postratings/images/loading.gif" width="16" height="16" class="post-ratings-image" />Loading...</div></li>       <li class="post_comment"><a href="http://ifeve.com/google-guava-io/#respond">发表评论</a></li>           </ul>
+         </div>
+   </div><!-- END .post_wrap -->
+
+   
+      <div id="comments_wrapper">
+    
+
+
+
+
+<div id="comment_header" class="clearfix">
+
+ <ul id="comment_header_left">
+  <li id="add_comment"><a href="#respond">发表评论</a></li>
+  <li id="comment_feed"><a href="http://ifeve.com/comments/feed/" title="RSS订阅评论">RSS订阅评论</a></li>
+ </ul>
+
+ <ul id="comment_header_right">
+   <li id="trackback_closed">Trackback 关闭</li>
+   <li id="comment_closed">评论 (0)</li>
+ </ul>
+
+
+</div><!-- END #comment_header -->
+
+<div id="comments">
+
+ <div id="comment_area">
+  <!-- start commnet -->
+  <ol class="commentlist">
+	    <li class="comment">
+     <div class="comment-content"><p>暂无评论</p></div>
+    </li>
+	  </ol>
+  <!-- comments END -->
+
+  
+ </div><!-- #comment-list END -->
+
+
+ <div id="trackback_area">
+ <!-- start trackback -->
+  <!-- trackback end -->
+ </div><!-- #trackbacklist END -->
+
+ 
+
+
+ 
+ <div class="comment_form_wrapper" id="respond">
+    您必须 <a href="http://ifeve.com/wp-login.php">登陆</a> 后才能发表评论 </div>
+
+ </div><!-- #comment end -->   </div>
+   
+      <div id="previous_next_post_single">
+    <div class="clearfix">
+     <p id="previous_post"><a href="http://ifeve.com/google-guava-ranges/" rel="prev">[Google Guava] 8-区间</a></p>     <p id="next_post"><a href="http://ifeve.com/google-guava-hashing/" rel="next">[Google Guava] 10-散列</a></p>    </div>
+   </div>
+   
+
+  </div><!-- END #left_col -->
+
+  <div id="container"></div>
+
+    <div id="right_col">
+   
+
+<div class="side_box clearfix" id="side_meta_content">
+
+  <ul id="social_link" class="clearfix">
+    <li class="rss_button"><a class="target_blank" href="http://ifeve.com/feed/">rss</a></li>
+       </ul>
+ 
+  <div id="search_area">
+    <form method="get" id="searchform" action="http://ifeve.com/">
+   <div><input id="search_button" class="rollover" type="image" src="http://ifeve.com/wp-content/themes/flat/img/search_button.gif" alt="搜索一下" title="搜索一下" /></div>
+   <div><input id="search_input" type="text" value="搜索一下" name="s" onfocus="if (this.value == '搜索一下') this.value = '';" onblur="if (this.value == '') this.value = '搜索一下';" /></div>
+  </form>
+   </div>
+ 
+</div>
+
+
+<div id="side_top">
+
+ <div class="side_box widget_text" id="text-17">
+			<div class="textwidget"><a target="_blank" href="http://ifeve.com/join-in-translation/">参与并发网翻译</a>。
+感谢<a target="_blank" href="https://ucloud.cn">Ucloud</a>提供云服务
+<br>
+
+<br>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 首页－右上－2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9394337417063147"
+     data-ad-slot="8872369516"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div>
+		<div class="side_box widget_recent_entries" id="recent-posts-2">
+		<h3 class="side_title">近期文章</h3>
+		<ul>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8b5-8-%e4%bd%bf%e7%94%a8%e8%87%aa%e5%ae%9a%e4%b9%89%e8%bd%ac%e6%8d%a2%e5%99%a8%e9%87%8d%e8%bd%bd%e9%bb%98%e8%ae%a4%e6%98%a0%e5%b0%84/">《Spring Data 官方文档》5.8. 使用自定义转换器重载默认映射至5.10. 异常解释</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8b5-7-%e6%9f%a5%e8%af%a2cql%e8%a1%a8/">《Spring Data 官方文档》5.7 查询CQL表</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8b5-6-%e4%bf%9d%e5%ad%98-%e6%9b%b4%e6%96%b0-%e4%bb%a5%e5%8f%8a%e5%88%a0%e9%99%a4%e6%95%b0%e6%8d%ae%e8%a1%8c/">《Spring Data 官方文档》5.6 保存, 更新, 以及删除数据行</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-data-4-1-4-3/">使用Spring Data 仓库工作 4.1-4.3</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-data-3/">《Spring Data 官方文档翻译》3. 其他帮助资源</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8b5-3-connecting-to-cassandra-with-spring%e8%87%b35-5-introduction-to-cassandratemplate/">《Spring Data官方文档》5.3. Connecting to Cassandra with Spring至5.5. Introduction to CassandraTemplate</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8breference-documentation%e8%87%b35-2-examples-repository/">《Spring Data 官方文档》Reference Documentation至5.2. Examples Repository</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e7%bf%bb%e8%af%91%e3%80%8bpreface%e5%88%b02-requirements/">《Spring Data 官方文档翻译》preface到2.requirements</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-data/">《Spring  Data官方文档》翻译邀请</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-4-8-spnegokerberos/">《HttpClient官方文档》4.8 SPNEGO/Kerberos验证</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-authenticati/">《HttpClient官方文档》HTTP验证4.4-4.7</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-8/">《HttpClient官方文档》2.8 HttpClient代理配置</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-boot-28-3-28-4/">《Spring Boot官方指南》28.3 -28.4</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-boot-28-1-28-2/">《Spring Boot官方指南》28.1 &#8211; 28.2</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e3%80%8ahttpclient%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e3%80%8b1-3-http%e6%89%a7%e8%a1%8c%e4%b8%8a%e4%b8%8b%e6%96%87/">《HttpClient官方文档》1.3 HTTP执行上下文</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-7/">《HttpClient官方文档》2.7 连接套接字工厂</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-6/">《HttpClient官方文档》2.6 连接维持存活策略</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-boot-28/">《Spring Boot官方指南》28.安全</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-http-cache/">《HttpClient官方文档》第六章 HTTP 缓存</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/%e5%b8%a6%e7%9d%80%e9%97%ae%e9%a2%98%e5%ad%a6-spring-mvc-%e6%ba%90%e7%a0%81%ef%bc%9a-%e4%b8%80%e3%80%81%e6%a6%82%e8%bf%b0/">带着问题学 Spring MVC 源码： 一、概述</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-5/">《HttpClient官方文档》2.5 连接驱逐策略</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-4/">《HttpClient官方文档》2.4 多线程请求执行</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-4-1-4-3/">《HttpClient官方文档》4.1-4.3 HTTP验证</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-2-3/">《HttpClient官方文档》2.3 HTTP连接管理</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/spring-boot-redis/">《Spring Boot官方指南》-30.1 redis</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-1-2/">《HttpClient官方文档》1.2 HttpClient 接口</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-1-1/">《HttpClient官方文档》1.1 执行请求</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/1-6-aborting-requests/">《HttpClient官方文档》1.6 中止请求</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/1-5-exception-handling/">《HttpClient官方文档》1.5 异常处理</a>
+						</li>
+					<li>
+				<a href="http://ifeve.com/httpclient-fluent-api/">《HttpClient 官方文档》第五章 Fluent API</a>
+						</li>
+				</ul>
+		</div>
+<div class="side_box widget_text" id="text-10">
+			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 首页－右上－2 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9394337417063147"
+     data-ad-slot="8872369516"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+		</div>
+<div class="side_box widget_views" id="views-4">
+<h3 class="side_title">热门文章</h3>
+<ul>
+<li><a href="http://ifeve.com/google-guava/"  title="Google Guava官方教程（中文版）">Google Guava官方教程（中文版）</a> 345,111 人阅读 </li><li><a href="http://ifeve.com/overview/"  title="Java NIO系列教程（一） Java NIO 概述">Java NIO系列教程（一） Java NIO 概述</a> 207,545 人阅读 </li><li><a href="http://ifeve.com/java-concurrency-thread-directory/"  title="Java并发性和多线程介绍目录">Java并发性和多线程介绍目录</a> 143,030 人阅读 </li><li><a href="http://ifeve.com/java-nio-all/"  title="Java NIO 系列教程">Java NIO 系列教程</a> 122,230 人阅读 </li><li><a href="http://ifeve.com/java-nio-vs-io/"  title="Java NIO系列教程（十二） Java NIO与IO">Java NIO系列教程（十二） Java NIO与IO</a> 117,265 人阅读 </li><li><a href="http://ifeve.com/getting-started-with-stom-index/"  title="《Storm入门》中文版">《Storm入门》中文版</a> 111,499 人阅读 </li><li><a href="http://ifeve.com/selectors/"  title="Java NIO系列教程（六） Selector">Java NIO系列教程（六） Selector</a> 110,457 人阅读 </li><li><a href="http://ifeve.com/channels/"  title="Java NIO系列教程（二） Channel">Java NIO系列教程（二） Channel</a> 105,021 人阅读 </li><li><a href="http://ifeve.com/buffers/"  title="Java NIO系列教程（三） Buffer">Java NIO系列教程（三） Buffer</a> 103,255 人阅读 </li><li><a href="http://ifeve.com/netty5-user-guide/"  title="Netty 5用户指南">Netty 5用户指南</a> 93,079 人阅读 </li><li><a href="http://ifeve.com/java-7-concurrency-cookbook/"  title="Java 7 并发编程指南中文版">Java 7 并发编程指南中文版</a> 91,721 人阅读 </li><li><a href="http://ifeve.com/spring-interview-questions-and-answers/"  title="69道Spring面试题和答案">69道Spring面试题和答案</a> 91,392 人阅读 </li><li><a href="http://ifeve.com/stream/"  title="Java8初体验（二）Stream语法详解">Java8初体验（二）Stream语法详解</a> 73,362 人阅读 </li><li><a href="http://ifeve.com/socket-channel/"  title="Java NIO系列教程（八） SocketChannel">Java NIO系列教程（八） SocketChannel</a> 72,710 人阅读 </li><li><a href="http://ifeve.com/disruptor/"  title="并发框架Disruptor译文">并发框架Disruptor译文</a> 72,507 人阅读 </li><li><a href="http://ifeve.com/getting-started-with-storm-1/"  title="Storm入门之第一章">Storm入门之第一章</a> 69,170 人阅读 </li><li><a href="http://ifeve.com/file-channel/"  title="Java NIO系列教程（七） FileChannel">Java NIO系列教程（七） FileChannel</a> 67,271 人阅读 </li><li><a href="http://ifeve.com/netty-mina-in-depth-1/"  title="Netty-Mina深入学习与对比（一）">Netty-Mina深入学习与对比（一）</a> 67,143 人阅读 </li><li><a href="http://ifeve.com/google-guava-using-and-avoiding-null/"  title="[Google Guava] 1.1-使用和避免null">[Google Guava] 1.1-使用和避免null</a> 66,319 人阅读 </li><li><a href="http://ifeve.com/locks-are-bad/"  title="剖析Disruptor:为什么会这么快？(一)锁的缺点">剖析Disruptor:为什么会这么快？(一)锁的缺点</a> 62,823 人阅读 </li></ul>
+</div>
+<div class="side_box widget_text" id="text-7">
+			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9394337417063147"
+     data-ad-slot="4721371513"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+		</div>
+<div class="side_box widget_recent_comments" id="recent-comments-2">
+<h3 class="side_title">近期评论</h3>
+<ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Jintao_Ma</span>发表在《<a href="http://ifeve.com/java-memory-model-6/comment-page-1/#comment-27263">Java内存模型</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27262">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27261">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">令狐冲</span>发表在《<a href="http://ifeve.com/guava-ratelimiter/comment-page-1/#comment-27260">Guava官方文档-RateLimiter类</a>》</li><li class="recentcomments"><span class="comment-author-link">qiantan20</span>发表在《<a href="http://ifeve.com/my-favorite/comment-page-1/#comment-27259">我的收藏</a>》</li><li class="recentcomments"><span class="comment-author-link">superzero</span>发表在《<a href="http://ifeve.com/thread-management-8/comment-page-1/#comment-27257">线程管理（七）守护线程的创建和运行</a>》</li><li class="recentcomments"><span class="comment-author-link"><a href='http://weibo.com/kirals' rel='external nofollow' class='url'>方 腾飞</a></span>发表在《<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e7%bf%bb%e8%af%91%e3%80%8bpreface%e5%88%b02-requirements/comment-page-1/#comment-27256">《Spring Data 官方文档翻译》preface到2.requirements</a>》</li><li class="recentcomments"><span class="comment-author-link">superzero</span>发表在《<a href="http://ifeve.com/thread-management-9/comment-page-1/#comment-27255">线程管理（八）在线程里处理不受控制的异常</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27254">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27253">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/%e3%80%8aspring-data-%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3%e7%bf%bb%e8%af%91%e3%80%8bpreface%e5%88%b02-requirements/comment-page-1/#comment-27252">《Spring Data 官方文档翻译》preface到2.requirements</a>》</li><li class="recentcomments"><span class="comment-author-link">zhanghTK</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27251">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">Iron</span>发表在《<a href="http://ifeve.com/question/%e6%9c%893%e4%b8%aa%e7%ba%bf%e7%a8%8babc%e3%80%82%e6%8c%89%e7%85%a7abc%e6%9d%a5%e8%bf%90%e8%a1%8c%ef%bc%88a%e7%ba%bf%e7%a8%8b%e8%be%93%e5%87%baa%ef%bc%8cb%e7%ba%bf%e7%a8%8b%e8%be%93%e5%87%bab%ef%bc%8c/comment-page-1/#comment-27250">有3个线程ABC。按照ABC来运行（A线程输出A，B线程输出B，C线程输出C，以此类推，循环输出）。</a>》</li><li class="recentcomments"><span class="comment-author-link">Iron</span>发表在《<a href="http://ifeve.com/question/%e6%9c%893%e4%b8%aa%e7%ba%bf%e7%a8%8babc%e3%80%82%e6%8c%89%e7%85%a7abc%e6%9d%a5%e8%bf%90%e8%a1%8c%ef%bc%88a%e7%ba%bf%e7%a8%8b%e8%be%93%e5%87%baa%ef%bc%8cb%e7%ba%bf%e7%a8%8b%e8%be%93%e5%87%bab%ef%bc%8c/comment-page-1/#comment-27249">有3个线程ABC。按照ABC来运行（A线程输出A，B线程输出B，C线程输出C，以此类推，循环输出）。</a>》</li><li class="recentcomments"><span class="comment-author-link">ray liang</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27248">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">edenpan</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27247">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">edenpan</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27246">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">浮伞</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27245">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link">flystarfly</span>发表在《<a href="http://ifeve.com/spring-data/comment-page-1/#comment-27244">《Spring  Data官方文档》翻译邀请</a>》</li><li class="recentcomments"><span class="comment-author-link"><a href='http://weibo.com/kirals' rel='external nofollow' class='url'>方 腾飞</a></span>发表在《<a href="http://ifeve.com/spring-boot-28-3-28-4/comment-page-1/#comment-27243">《Spring Boot官方指南》28.3 -28.4</a>》</li></ul></div>
+<div class="side_box widget_tag_cloud" id="tag_cloud-4">
+<h3 class="side_title">标签</h3>
+<div class="tagcloud"><a href='http://ifeve.com/tag/actor/' class='tag-link-226' title='17个话题' style='font-size: 12.710280373832pt;'>actor</a>
+<a href='http://ifeve.com/tag/basic/' class='tag-link-213' title='14个话题' style='font-size: 11.663551401869pt;'>Basic</a>
+<a href='http://ifeve.com/tag/classes/' class='tag-link-251' title='8个话题' style='font-size: 8.6542056074766pt;'>classes</a>
+<a href='http://ifeve.com/tag/collections/' class='tag-link-260' title='11个话题' style='font-size: 10.355140186916pt;'>collections</a>
+<a href='http://ifeve.com/tag/concurrency/' class='tag-link-111' title='76个话题' style='font-size: 20.953271028037pt;'>concurrency</a>
+<a href='http://ifeve.com/tag/concurrent/' class='tag-link-214' title='14个话题' style='font-size: 11.663551401869pt;'>Concurrent</a>
+<a href='http://ifeve.com/tag/concurrent-data-structure/' class='tag-link-322' title='13个话题' style='font-size: 11.271028037383pt;'>concurrent data structure</a>
+<a href='http://ifeve.com/tag/customizing/' class='tag-link-250' title='8个话题' style='font-size: 8.6542056074766pt;'>Customizing</a>
+<a href='http://ifeve.com/tag/date/' class='tag-link-505' title='7个话题' style='font-size: 8pt;'>date</a>
+<a href='http://ifeve.com/tag/executor/' class='tag-link-177' title='20个话题' style='font-size: 13.495327102804pt;'>Executor</a>
+<a href='http://ifeve.com/tag/executor-framework/' class='tag-link-231' title='18个话题' style='font-size: 12.971962616822pt;'>Executor framework</a>
+<a href='http://ifeve.com/tag/false-sharing/' class='tag-link-119' title='7个话题' style='font-size: 8pt;'>False Sharing</a>
+<a href='http://ifeve.com/tag/faq/' class='tag-link-39' title='13个话题' style='font-size: 11.271028037383pt;'>faq</a>
+<a href='http://ifeve.com/tag/fork/' class='tag-link-232' title='11个话题' style='font-size: 10.355140186916pt;'>fork</a>
+<a href='http://ifeve.com/tag/forkjoin/' class='tag-link-224' title='9个话题' style='font-size: 9.3084112149533pt;'>Fork/Join</a>
+<a href='http://ifeve.com/tag/fork-join/' class='tag-link-53' title='8个话题' style='font-size: 8.6542056074766pt;'>fork join</a>
+<a href='http://ifeve.com/tag/framework/' class='tag-link-73' title='30个话题' style='font-size: 15.719626168224pt;'>Framework</a>
+<a href='http://ifeve.com/tag/functional-programming/' class='tag-link-460' title='10个话题' style='font-size: 9.8317757009346pt;'>Functional Programming</a>
+<a href='http://ifeve.com/tag/guava/' class='tag-link-309' title='14个话题' style='font-size: 11.663551401869pt;'>Guava</a>
+<a href='http://ifeve.com/tag/io/' class='tag-link-129' title='26个话题' style='font-size: 14.934579439252pt;'>IO</a>
+<a href='http://ifeve.com/tag/java/' class='tag-link-69' title='93个话题' style='font-size: 22pt;'>JAVA</a>
+<a href='http://ifeve.com/tag/java8/' class='tag-link-342' title='12个话题' style='font-size: 10.747663551402pt;'>java8</a>
+<a href='http://ifeve.com/tag/jmm/' class='tag-link-31' title='31个话题' style='font-size: 15.981308411215pt;'>jmm</a>
+<a href='http://ifeve.com/tag/join/' class='tag-link-233' title='11个话题' style='font-size: 10.355140186916pt;'>join</a>
+<a href='http://ifeve.com/tag/jvm/' class='tag-link-127' title='16个话题' style='font-size: 12.317757009346pt;'>JVM</a>
+<a href='http://ifeve.com/tag/lock/' class='tag-link-17' title='23个话题' style='font-size: 14.280373831776pt;'>lock</a>
+<a href='http://ifeve.com/tag/memory-barriers/' class='tag-link-75' title='10个话题' style='font-size: 9.8317757009346pt;'>Memory Barriers</a>
+<a href='http://ifeve.com/tag/netty/' class='tag-link-280' title='25个话题' style='font-size: 14.672897196262pt;'>Netty</a>
+<a href='http://ifeve.com/tag/nio/' class='tag-link-131' title='19个话题' style='font-size: 13.233644859813pt;'>NIO</a>
+<a href='http://ifeve.com/tag/oauth-2-0/' class='tag-link-380' title='8个话题' style='font-size: 8.6542056074766pt;'>OAuth 2.0</a>
+<a href='http://ifeve.com/tag/pattern-matching/' class='tag-link-167' title='8个话题' style='font-size: 8.6542056074766pt;'>pattern-matching</a>
+<a href='http://ifeve.com/tag/ringbuffer/' class='tag-link-91' title='7个话题' style='font-size: 8pt;'>RingBuffer</a>
+<a href='http://ifeve.com/tag/scala/' class='tag-link-166' title='22个话题' style='font-size: 14.018691588785pt;'>Scala</a>
+<a href='http://ifeve.com/tag/slf4j/' class='tag-link-813' title='8个话题' style='font-size: 8.6542056074766pt;'>slf4j</a>
+<a href='http://ifeve.com/tag/spark/' class='tag-link-634' title='17个话题' style='font-size: 12.710280373832pt;'>spark</a>
+<a href='http://ifeve.com/tag/spark%e5%ae%98%e6%96%b9%e6%96%87%e6%a1%a3/' class='tag-link-635' title='17个话题' style='font-size: 12.710280373832pt;'>spark官方文档</a>
+<a href='http://ifeve.com/tag/stm/' class='tag-link-199' title='12个话题' style='font-size: 10.747663551402pt;'>stm</a>
+<a href='http://ifeve.com/tag/storm/' class='tag-link-351' title='39个话题' style='font-size: 17.158878504673pt;'>Storm</a>
+<a href='http://ifeve.com/tag/synchronization/' class='tag-link-216' title='15个话题' style='font-size: 11.92523364486pt;'>synchronization</a>
+<a href='http://ifeve.com/tag/synchronized/' class='tag-link-15' title='10个话题' style='font-size: 9.8317757009346pt;'>Synchronized</a>
+<a href='http://ifeve.com/tag/thread/' class='tag-link-11' title='41个话题' style='font-size: 17.420560747664pt;'>thread</a>
+<a href='http://ifeve.com/tag/time/' class='tag-link-506' title='7个话题' style='font-size: 8pt;'>time</a>
+<a href='http://ifeve.com/tag/tomcat/' class='tag-link-347' title='8个话题' style='font-size: 8.6542056074766pt;'>tomcat</a>
+<a href='http://ifeve.com/tag/volatile/' class='tag-link-25' title='11个话题' style='font-size: 10.355140186916pt;'>volatile</a>
+<a href='http://ifeve.com/tag/%e5%a4%9a%e7%ba%bf%e7%a8%8b/' class='tag-link-197' title='8个话题' style='font-size: 8.6542056074766pt;'>多线程</a></div>
+</div>
+<div class="side_box widget_text" id="text-9">
+			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-9394337417063147"
+     data-ad-slot="6198104715"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+</div>
+		</div>
+</div>
+<div id="side_middle" class="clearfix">
+ <div id="side_left">
+  <div class="side_box_short widget_archive" id="archives-2">
+<h3 class="side_title">文章归档</h3>
+		<ul>
+	<li><a href='http://ifeve.com/2016/11/'>2016年十一月</a>&nbsp;(17)</li>
+	<li><a href='http://ifeve.com/2016/10/'>2016年十月</a>&nbsp;(16)</li>
+	<li><a href='http://ifeve.com/2016/09/'>2016年九月</a>&nbsp;(11)</li>
+	<li><a href='http://ifeve.com/2016/08/'>2016年八月</a>&nbsp;(7)</li>
+	<li><a href='http://ifeve.com/2016/07/'>2016年七月</a>&nbsp;(10)</li>
+	<li><a href='http://ifeve.com/2016/06/'>2016年六月</a>&nbsp;(10)</li>
+	<li><a href='http://ifeve.com/2016/05/'>2016年五月</a>&nbsp;(24)</li>
+	<li><a href='http://ifeve.com/2016/04/'>2016年四月</a>&nbsp;(28)</li>
+	<li><a href='http://ifeve.com/2016/03/'>2016年三月</a>&nbsp;(8)</li>
+	<li><a href='http://ifeve.com/2016/02/'>2016年二月</a>&nbsp;(7)</li>
+	<li><a href='http://ifeve.com/2016/01/'>2016年一月</a>&nbsp;(10)</li>
+	<li><a href='http://ifeve.com/2015/12/'>2015年十二月</a>&nbsp;(15)</li>
+	<li><a href='http://ifeve.com/2015/11/'>2015年十一月</a>&nbsp;(24)</li>
+	<li><a href='http://ifeve.com/2015/10/'>2015年十月</a>&nbsp;(17)</li>
+	<li><a href='http://ifeve.com/2015/09/'>2015年九月</a>&nbsp;(29)</li>
+	<li><a href='http://ifeve.com/2015/08/'>2015年八月</a>&nbsp;(44)</li>
+	<li><a href='http://ifeve.com/2015/07/'>2015年七月</a>&nbsp;(20)</li>
+	<li><a href='http://ifeve.com/2015/06/'>2015年六月</a>&nbsp;(21)</li>
+	<li><a href='http://ifeve.com/2015/05/'>2015年五月</a>&nbsp;(15)</li>
+	<li><a href='http://ifeve.com/2015/04/'>2015年四月</a>&nbsp;(27)</li>
+	<li><a href='http://ifeve.com/2015/03/'>2015年三月</a>&nbsp;(13)</li>
+	<li><a href='http://ifeve.com/2015/02/'>2015年二月</a>&nbsp;(11)</li>
+	<li><a href='http://ifeve.com/2015/01/'>2015年一月</a>&nbsp;(13)</li>
+	<li><a href='http://ifeve.com/2014/12/'>2014年十二月</a>&nbsp;(26)</li>
+	<li><a href='http://ifeve.com/2014/11/'>2014年十一月</a>&nbsp;(61)</li>
+	<li><a href='http://ifeve.com/2014/10/'>2014年十月</a>&nbsp;(33)</li>
+	<li><a href='http://ifeve.com/2014/09/'>2014年九月</a>&nbsp;(47)</li>
+	<li><a href='http://ifeve.com/2014/08/'>2014年八月</a>&nbsp;(27)</li>
+	<li><a href='http://ifeve.com/2014/07/'>2014年七月</a>&nbsp;(13)</li>
+	<li><a href='http://ifeve.com/2014/06/'>2014年六月</a>&nbsp;(32)</li>
+	<li><a href='http://ifeve.com/2014/05/'>2014年五月</a>&nbsp;(45)</li>
+	<li><a href='http://ifeve.com/2014/04/'>2014年四月</a>&nbsp;(41)</li>
+	<li><a href='http://ifeve.com/2014/03/'>2014年三月</a>&nbsp;(34)</li>
+	<li><a href='http://ifeve.com/2014/02/'>2014年二月</a>&nbsp;(38)</li>
+	<li><a href='http://ifeve.com/2014/01/'>2014年一月</a>&nbsp;(19)</li>
+	<li><a href='http://ifeve.com/2013/12/'>2013年十二月</a>&nbsp;(10)</li>
+	<li><a href='http://ifeve.com/2013/11/'>2013年十一月</a>&nbsp;(4)</li>
+	<li><a href='http://ifeve.com/2013/10/'>2013年十月</a>&nbsp;(20)</li>
+	<li><a href='http://ifeve.com/2013/09/'>2013年九月</a>&nbsp;(38)</li>
+	<li><a href='http://ifeve.com/2013/08/'>2013年八月</a>&nbsp;(48)</li>
+	<li><a href='http://ifeve.com/2013/07/'>2013年七月</a>&nbsp;(26)</li>
+	<li><a href='http://ifeve.com/2013/06/'>2013年六月</a>&nbsp;(16)</li>
+	<li><a href='http://ifeve.com/2013/05/'>2013年五月</a>&nbsp;(9)</li>
+	<li><a href='http://ifeve.com/2013/04/'>2013年四月</a>&nbsp;(17)</li>
+	<li><a href='http://ifeve.com/2013/03/'>2013年三月</a>&nbsp;(41)</li>
+	<li><a href='http://ifeve.com/2013/02/'>2013年二月</a>&nbsp;(25)</li>
+	<li><a href='http://ifeve.com/2013/01/'>2013年一月</a>&nbsp;(57)</li>
+	<li><a href='http://ifeve.com/2012/12/'>2012年十二月</a>&nbsp;(9)</li>
+	<li><a href='http://ifeve.com/2012/10/'>2012年十月</a>&nbsp;(1)</li>
+	<li><a href='http://ifeve.com/2012/08/'>2012年八月</a>&nbsp;(1)</li>
+		</ul>
+</div>
+ </div>
+ <div id="side_right">
+  <div class="side_box_short widget_links" id="linkcat-2">
+<h3 class="side_title">友情链接</h3>
+
+	<ul class='xoxo blogroll'>
+<li><a href="http://coolshell.cn" rel="co-worker" target="_blank">coolshell</a></li>
+<li><a href="http://blog.91gaoqing.com" target="_blank">Programer. 大猫</a></li>
+<li><a href="http://hugozhu.myalert.info" rel="co-worker" target="_blank">一粟的博客</a></li>
+<li><a href="http://bj.liepin.com">北京猎聘网</a></li>
+<li><a href="http://blog.csdn.net/cutesource/" rel="acquaintance co-worker" target="_blank">志俊的博客</a></li>
+<li><a href="http://www.zuidaima.com">最代码</a></li>
+<li><a href="http://diandianzhe.com">点点折</a></li>
+<li><a href="http://www.liuinsect.com">码梦为生</a></li>
+<li><a href="http://namiao.org" rel="acquaintance co-worker" target="_blank">纳秒</a></li>
+<li><a href="http://www.656463.com">领悟书生</a></li>
+
+	</ul>
+</div>
+
+<div class="side_box_short widget_categories" id="categories-2">
+<h3 class="side_title">分类目录</h3>
+		<ul>
+	<li class="cat-item cat-item-387"><a href="http://ifeve.com/category/framework/akka/" >akka</a> (19)
+</li>
+	<li class="cat-item cat-item-415"><a href="http://ifeve.com/category/android/" >Android</a> (3)
+</li>
+	<li class="cat-item cat-item-289"><a href="http://ifeve.com/category/c/" >C++</a> (11)
+</li>
+	<li class="cat-item cat-item-366"><a href="http://ifeve.com/category/cpu-2/" >CPU</a> (2)
+</li>
+	<li class="cat-item cat-item-73"><a href="http://ifeve.com/category/framework/" >Framework</a> (50)
+</li>
+	<li class="cat-item cat-item-458"><a href="http://ifeve.com/category/go/" >GO</a> (6)
+</li>
+	<li class="cat-item cat-item-617"><a href="http://ifeve.com/category/groovy/" >groovy</a> (6)
+</li>
+	<li class="cat-item cat-item-310"><a href="http://ifeve.com/category/guava-2/" >guava</a> (22)
+</li>
+	<li class="cat-item cat-item-69"><a href="http://ifeve.com/category/java/" >JAVA</a> (513)
+</li>
+	<li class="cat-item cat-item-127"><a href="http://ifeve.com/category/jvm/" >JVM</a> (36)
+</li>
+	<li class="cat-item cat-item-300"><a href="http://ifeve.com/category/linux/" >linux</a> (7)
+</li>
+	<li class="cat-item cat-item-280"><a href="http://ifeve.com/category/netty/" >Netty</a> (31)
+</li>
+	<li class="cat-item cat-item-632"><a href="http://ifeve.com/category/react/" >react</a> (5)
+</li>
+	<li class="cat-item cat-item-623"><a href="http://ifeve.com/category/redis/" >redis</a> (21)
+</li>
+	<li class="cat-item cat-item-166"><a href="http://ifeve.com/category/scala/" >Scala</a> (11)
+</li>
+	<li class="cat-item cat-item-672"><a href="http://ifeve.com/category/spark/" >spark</a> (19)
+</li>
+	<li class="cat-item cat-item-388"><a href="http://ifeve.com/category/storm/" >storm</a> (44)
+</li>
+	<li class="cat-item cat-item-620"><a href="http://ifeve.com/category/thinking/" >thinking</a> (3)
+</li>
+	<li class="cat-item cat-item-485"><a href="http://ifeve.com/category/velocity/" >Velocity</a> (9)
+</li>
+	<li class="cat-item cat-item-279"><a href="http://ifeve.com/category/web/" >Web</a> (15)
+</li>
+	<li class="cat-item cat-item-980"><a href="http://ifeve.com/category/zookeeper/" >zookeeper</a> (1)
+</li>
+	<li class="cat-item cat-item-148"><a href="http://ifeve.com/category/notice/" >公告</a> (5)
+</li>
+	<li class="cat-item cat-item-378"><a href="http://ifeve.com/category/bigdata/" >大数据</a> (27)
+</li>
+	<li class="cat-item cat-item-138"><a href="http://ifeve.com/category/%e5%a5%bd%e6%96%87%e6%8e%a8%e8%8d%90/" >好文推荐</a> (29)
+</li>
+	<li class="cat-item cat-item-244"><a href="http://ifeve.com/category/%e5%b9%b6%e5%8f%91%e4%b9%a6%e7%b1%8d/" >并发书籍</a> (95)
+</li>
+	<li class="cat-item cat-item-29"><a href="http://ifeve.com/category/concurrency-translation/" title="发布国外并发编程相关文献译文。">并发译文</a> (378)
+</li>
+	<li class="cat-item cat-item-979"><a href="http://ifeve.com/category/%e6%84%9f%e6%82%9f/" >感悟</a> (1)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://ifeve.com/category/ask/" title="可以在这里发表并发编程的问题。如何发表？用QQ登陆，然后点击“新建文章”，管理员审核后就可以发表。">技术问答</a> (12)
+</li>
+	<li class="cat-item cat-item-147"><a href="http://ifeve.com/category/%e6%95%8f%e6%8d%b7%e7%ae%a1%e7%90%86/" >敏捷管理</a> (6)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://ifeve.com/category/talk-concurrent/" >本站原创</a> (81)
+</li>
+	<li class="cat-item cat-item-367"><a href="http://ifeve.com/category/%e6%9e%b6%e6%9e%84/" >架构</a> (20)
+</li>
+	<li class="cat-item cat-item-305"><a href="http://ifeve.com/category/%e6%b4%bb%e5%8a%a8/" >活动</a> (6)
+</li>
+	<li class="cat-item cat-item-414"><a href="http://ifeve.com/category/%e7%bd%91%e7%bb%9c/" >网络</a> (4)
+</li>
+		</ul>
+</div>
+ </div>
+</div>
+<div id="side_bottom">
+ <div class="side_box widget_text" id="text-15">
+			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 摩天大楼 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-9394337417063147"
+     data-ad-slot="6358703113"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script type="text/javascript">
+    /*自适应 创建于 June 30, 2016*/
+    var cpro_id = "u2690738";
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/i.js"></script>
+
+
+<!-- CNZZ -->
+<script src="http://s22.cnzz.com/stat.php?id=5003572&web_id=5003572&show=pic" language="JavaScript"></script>
+
+感谢<a href="https://www.upyun.com/index.html" target="_blank">又拍云</a>为本站提供服务器和图片服务。</b></div>
+		</div>
+</div>
+
+  </div>
+  
+  <div id="footer">
+
+<ul id="copyright">
+    <li>版权所有 &copy;&nbsp; <a href="http://ifeve.com/">并发编程网 &#8211; ifeve.com</a></li>
+    <li>ICP号: <a href="http://www.miibeian.gov.cn" target="_blank">浙ICP备12046809号</a></li>
+ <li>	
+<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005873" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="" style="float:left;"/>浙公网安备 33010602005873号</a></li>
+   </ul>
+		 
+		 
+
+ </div>
+
+	
+ </div><!-- END #main_content -->
+
+  <p id="return_top"><a href="#header">return top</a></p>
+ 
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shCore.js?ver=2.1.364'></script>
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/shBrushJava.js?ver=2.1.364'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://ifeve.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shCore.css?ver=2.1.364";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://ifeve.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/styles/shThemeEclipse.css?ver=2.1.364";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.clipboardSwf = 'http://ifeve.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter2/scripts/clipboard.swf';
+	SyntaxHighlighter.config.strings.expandSource = 'show source';
+	SyntaxHighlighter.config.strings.viewSource = '查看源代码';
+	SyntaxHighlighter.config.strings.copyToClipboard = '复制到剪贴板';
+	SyntaxHighlighter.config.strings.copyToClipboardConfirmation = '代码现在在你的剪贴板';
+	SyntaxHighlighter.config.strings.print = '打印';
+	SyntaxHighlighter.config.strings.help = '帮助';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '无法找到Brush：';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush不能设置 html-script选项';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = true;
+	SyntaxHighlighter.all();
+</script>
+<link rel='stylesheet' id='yarppRelatedCss-css'  href='http://ifeve.com/wp-content/plugins/yet-another-related-posts-plugin/style/related.css?ver=4.2.10' type='text/css' media='all' />
+<script type='text/javascript' src='http://ifeve.com/wp-includes/js/comment-reply.min.js?ver=4.2.10'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ratingsL10n = {"plugin_url":"http:\/\/ifeve.com\/wp-content\/plugins\/wp-postratings","ajax_url":"http:\/\/ifeve.com\/wp-admin\/admin-ajax.php","text_wait":"Please rate only 1 post at a time.","image":"stars_crystal","image_ext":"gif","max":"5","show_loading":"1","show_fading":"1","custom":"0"};
+var ratings_mouseover_image=new Image();ratings_mouseover_image.src=ratingsL10n.plugin_url+"/images/"+ratingsL10n.image+"/rating_over."+ratingsL10n.image_ext;;
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/wp-postratings/postratings-js.js?ver=1.83'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/ifeve.com\/wp-admin\/admin-ajax.php","post_id":"8995"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ifeve.com/wp-content/plugins/wp-postviews/postviews-cache.js?ver=1.68'></script>
+</body>
+</html>
+
+<script src="http://ajax.useso.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+<script src="http://coolshell.cn//wp-content/themes/inove/js/jquery.bpopup-0.8.0.min.js"></script>
+
+<!-- Dynamic page generated in 0.777 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2016-11-15 15:24:39 -->

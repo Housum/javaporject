@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-10-3 23:46:06 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.hotusm.hibernate.entity.Demo" table="DEMO">
+        <id name="id" column="DEMO_ID">
+        </id>
+        
+        <property name="memo" type="java.lang.String">
+            <column name="MEMO" />
+        </property>
+       
+    </class>
+</hibernate-mapping>

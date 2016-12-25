@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-10-3 23:46:06 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.hotusm.hibernate.entity.Many" table="MANY">
+        <id name="id" column="DEMO_ID">
+			<generator class="foreign">
+				<param name="property">demo</param>
+			</generator>
+        </id>
+        
+        <one-to-one name="demo" constrained="true" foreign-key="DEMO"/>
+        <property name="desc" type="java.lang.String">
+            <column name="DESC_MANY" />
+        </property>
+    </class>
+</hibernate-mapping>

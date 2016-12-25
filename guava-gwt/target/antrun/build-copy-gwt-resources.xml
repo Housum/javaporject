@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="copy-gwt-resources"  >
+<target name="copy-gwt-resources">
+  <copy toDir="D:\GitProject\guava\guava-gwt\target/guava-gwt-sources" verbose="true">
+    <fileset dir="D:\GitProject\guava\guava-gwt\target/guava-sources">
+      <contains text="@GwtCompatible"/>
+    </fileset>
+  </copy>
+  <copy toDir="D:\GitProject\guava\guava-gwt\target/guava-test-gwt-sources" verbose="true">
+    <fileset dir="D:\GitProject\guava\guava-gwt\target/guava-test-sources">
+      <contains text="@GwtCompatible"/>
+    </fileset>
+  </copy>
+</target>
+</project>
