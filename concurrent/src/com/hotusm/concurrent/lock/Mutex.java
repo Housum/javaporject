@@ -23,7 +23,7 @@ public class Mutex implements Lock{
         }
 
         /**
-         * 获取
+         * 获取锁
          * @param arg
          * @return
          */
@@ -36,6 +36,11 @@ public class Mutex implements Lock{
             return false;
         }
 
+        /**
+         * 释放锁
+         * @param arg
+         * @return
+         */
         @Override
         protected boolean tryRelease(int arg) {
 
