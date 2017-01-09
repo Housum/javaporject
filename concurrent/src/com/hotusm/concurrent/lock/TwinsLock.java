@@ -7,6 +7,7 @@ import java.util.concurrent.locks.Lock;
 
 /**
  * 根据AQS 实现共享锁
+ * 共享两个共享元
  */
 public class TwinsLock implements Lock{
 
@@ -92,6 +93,7 @@ public class TwinsLock implements Lock{
        final Lock lock=new TwinsLock();
 
 
+       //模拟多个线程获取锁 可以看到这里是两个两个的输出的
         class  ThreadExt extends Thread{
                @Override
                public void run() {
