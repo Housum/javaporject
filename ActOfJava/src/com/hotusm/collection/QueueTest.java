@@ -2,6 +2,9 @@ package com.hotusm.collection;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 队列  @link http://blog.csdn.net/ydj7501603/article/details/17246949
@@ -28,6 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class QueueTest {
 	
 	public static void main(String[] args) {
+		
 		//堵塞队列  
 		final BlockingQueue<Integer> q=new ArrayBlockingQueue<Integer>(3);
 		final AtomicInteger number=new AtomicInteger(0);
@@ -64,5 +68,19 @@ public class QueueTest {
 						}
 			};
 		}.start();
+	}
+	
+	public void listTypeOfQueue(){
+		
+		/**/
+		BlockingQueue<?> queue=new ArrayBlockingQueue<>(10);
+				
+	    queue=new LinkedBlockingQueue<>();
+		
+		queue=new SynchronousQueue<>();
+		
+		queue=new PriorityBlockingQueue<>();
+		
+		
 	}
 }

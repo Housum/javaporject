@@ -18,7 +18,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * @see java.util.concurrent.atomic.AtomicInteger.addAndGet(int)
  * 乐观锁和悲观锁的区别:
  * 悲观锁是一种独占锁，它假设的前提是“冲突一定会发生”，所以处理某段可能出现数据冲突的代码时，这个代码段就要被某个线程独占。而独占意味着“其它即将执行这段代码的其他线程”都将进入“阻塞”/“挂起”状态
- * 乐观锁假定“冲突不一定会出现”，如果出现冲突则进行重试，直到冲突消失。 由于乐观锁的假定条件，所以乐观锁不会独占资源，自然性能就会好于悲观锁。AtomicInteger是一个标准的乐观锁实现，sun.misc.Unsafe是JDK提供的乐观锁的支持。
+ * 乐观锁假定“冲突不一定会出现”，如果出现冲突则进行重试，直到冲突消失。
+ * 由于乐观锁的假定条件，所以乐观锁不会独占资源，自然性能就会好于悲观锁。AtomicInteger是一个标准的乐观锁实现，sun.misc.Unsafe是JDK提供的乐观锁的支持。
  * 
  * @link http://blog.csdn.net/yinwenjie/article/details/50698751
  * 

@@ -1,4 +1,4 @@
-package src.com.hotusm.algorithm.datastructure.list;
+package com.hotusm.algorithm.datastructure.list;
 
 /**
  * @author luqibao
