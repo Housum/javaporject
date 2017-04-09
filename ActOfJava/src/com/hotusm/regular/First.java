@@ -1,7 +1,5 @@
 package com.hotusm.regular;
 
-import java.io.File;
-
 import org.junit.Test;
 
 import com.hotusm.annotation.Date;
@@ -58,6 +56,6 @@ public class First {
 	
 	@Test
 	public void test(){
-		System.out.println("/em/orderinfo/".matches("^/em/orderinfo/"));
+		System.out.println("java".matches("[a-zA-Z]+"));
 	}
 }
